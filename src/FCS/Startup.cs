@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using FCS.Models;
 
 namespace FCS
 {
@@ -33,6 +34,12 @@ namespace FCS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Adds services required for using options.
+            services.AddOptions();
+
+            // Register the IConfiguration instance which WebSettings binds against.
+            services.Configure<WebSettings>(Configuration);
+
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
